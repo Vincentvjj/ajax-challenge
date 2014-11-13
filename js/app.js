@@ -1,7 +1,8 @@
 "use strict";
 /*
-    app.js, main Angular application script
-    define your module and controllers here
+    to Do: Include thumbs up thumbs down
+            include delete function
+            better presentaitoin for comment section
 */
 
 var taskUrl = 'https://api.parse.com/1/classes/comments';
@@ -13,7 +14,7 @@ function onSubmit(evt) {
 
     if (evt.returnValue == false && evt.preventDefault) {
         evt.preventDefault();
-        document.getElementsByClassName("btn")[0].style.display = "none";
+
     }
 
     return evt.returnValue;
@@ -88,26 +89,46 @@ angular.module('RateApp', ['ui.bootstrap'])
             comment: '',
             ratings: null
 
-
-
         };
 
 
         $scope.addComments = function() {
-            $http.post(taskUrl, $scope.newComments).success(function(responseData) {
-                $scope.newComments.objectId = responseData.objectId;
+            document.getElementById("rating-message").style.display = "none";
+            if($scope.newComments.title == '' || $scope.newComments.name == '' || $scope.newComments.comment == '' ||
+                $scope.newComments.ratings == null) {
+                if($scope.newComments.ratings == null) {
+                    document.getElementById("rating-message").style.display = "block";
+                    document.getElementById("rating-message").innerHTML = "AT least One star Please :(";
 
 
-                $scope.comments.push($scope.newComments);
-                $scope.isEmpty = false;
-            }).error(function(err) {
-                $scope.errorMessage = err;
+                    document.getElementById("rating-message").style.color = "red";
+                }
+                return;
+            }
+            else {
 
-            }).finally(function() {
+                $http.post(taskUrl, $scope.newComments).success(function (responseData) {
+                    $scope.newComments.objectId = responseData.objectId;
 
-                $scope.newComments = {};
-            });
 
+                    $scope.comments.push($scope.newComments);
+                    $scope.isEmpty = false;
+                    $scope.newComments = {
+
+                        title: '',
+                        name: '',
+                        comment: '',
+                        ratings: null
+
+                    };
+
+
+
+                }).error(function (err) {
+                    $scope.errorMessage = err;
+
+                });
+            }
 
         };
 

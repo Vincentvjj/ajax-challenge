@@ -40,10 +40,12 @@
                                placeholder="Please Input Your Comments Here"  ng-model="newComments.comment"></textarea>
 
                     </div>
-                    <div class="form-group">
+                    <div class="form-rating">
                         <label for="user-ratings">Rating:</label>
                         <rating id="user-ratings" max="5" name="ratings" ng-model="newComments.ratings"></rating>
                     </div>
+
+                    <p id="rating-message" class="error-message"></p>
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary" ng-disabled="inserting" ng-click="addComments()">Submit</button>
@@ -69,11 +71,11 @@
                 </div>
                 <div ng-repeat="comment in comments">
                     Title: {{comment.title}}<br/>
-                    Name: {{comment.name}}<br/>
+                    {{comment.name}} said, "{{comment.comment}}." <br/>
                     Rating:
                     <rating max="5" ng-model="comment.ratings" readonly="true"></rating>
-                    <br/>
-                    Comment: {{comment.comment}}<br/><br/>
+                    <br/><br/>
+
 
                 </div>
 
