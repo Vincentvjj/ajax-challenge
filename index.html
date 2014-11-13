@@ -21,32 +21,37 @@
             <section>
                 <h2>Add a Comment</h2>
 
-                <form class="form-vertical" role="form">
+                <form id="comment-form">
                     <div class="form-group">
                         <label for="name">Full Name:</label>
-                        <input type="text" class="form-control input-mysize" id="name"
+                        <input type="text" class="form-control" id="name" name="name"
                                ng-model="newComments.name" placeholder="Please Input Your Name"/>
                     </div>
 
                     <div class="form-group">
                         <label for="title">Title:</label>
-                        <input type="text" class="form-control input-mysize" id="title"
+                        <input type="text" class="form-control" id="title" name="title"
                                ng-model="newComments.title" placeholder="Please Input the Title"/>
                     </div>
 
                     <div class="form-group">
                         <label for="user-comment">Comment:</label>
-                        <textarea class="form-control" id="user-comment" rows="4"
+                        <textarea class="form-control" id="user-comment" rows="4" name="comment"
                                placeholder="Please Input Your Comments Here"  ng-model="newComments.comment"></textarea>
 
                     </div>
                     <div class="form-group">
                         <label for="user-ratings">Rating:</label>
-                        <rating id="user-ratings" max="5" ng-model="newComments.ratings"></rating>
+                        <rating id="user-ratings" max="5" name="ratings" ng-model="newComments.ratings"></rating>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" ng-disabled="inserting" ng-click="addComments()">Submit</button>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" ng-disabled="inserting" ng-click="addComments()">Submit</button>
+                    </div>
+
                 </form>
+
+
 
 
                 <!--put a form here for entering a new comment-->

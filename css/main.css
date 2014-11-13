@@ -11,11 +11,7 @@ body {
     margin-right: 10px;
 }
 
-.input-mysize {
-    width: 250px;
+.invalid-field {
+    border: 1px solid #FF0000;
 }
 
-
-#new-msg {
-    display: none;
-}
