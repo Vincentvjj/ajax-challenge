@@ -6,10 +6,12 @@
         <title>Product Comments</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/main.css">
+
+
     </head>
     <body>
 
-        <main class="container">
+        <main class="container" ng-app="RateApp" ng-controller="CommentsController">
             <section>
                 <img src="img/super-bass-o-matic-76.jpg" alt="product picture" class="product-picture">
                 <h1>The Super Bass-o-Matic '76</h1>
@@ -18,20 +20,59 @@
 
             <section>
                 <h2>Add a Comment</h2>
-                
-                <!--  
-                put a form here for entering a new comment
-                the user must select a rating, and enter a name, title, and comment body
-                before the comment can be saved to the server
-                for the rating selection, use the Angular Bootstrap Rating directive 
-                http://angular-ui.github.io/bootstrap/#/rating
-                their script file is included below
-                -->
+
+                <form class="form-vertical" role="form">
+                    <div class="form-group">
+                        <label for="name">Full Name:</label>
+                        <input type="text" class="form-control input-mysize" id="name"
+                               ng-model="newComments.name" placeholder="Please Input Your Name"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Title:</label>
+                        <input type="text" class="form-control input-mysize" id="title"
+                               ng-model="newComments.title" placeholder="Please Input the Title"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user-comment">Comment:</label>
+                        <textarea class="form-control" id="user-comment" rows="4"
+                               placeholder="Please Input Your Comments Here"  ng-model="newComments.comment"></textarea>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="user-ratings">Rating:</label>
+                        <rating id="user-ratings" max="5" ng-model="newComments.ratings"></rating>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" ng-disabled="inserting" ng-click="addComments()">Submit</button>
+                </form>
+
+
+                <!--put a form here for entering a new comment-->
+                <!--the user must select a rating, and enter a name, title, and comment body-->
+                <!--before the comment can be saved to the server-->
+                <!--for the rating selection, use the Angular Bootstrap Rating directive-->
+                <!--http://angular-ui.github.io/bootstrap/#/rating-->
+                <!--their script file is included below-->
             </section>
 
             <section>
                 <h2>Comments</h2>
-                <!-- 
+                <div ng-if="isEmpty">
+                    There are no comments yet! Be the first to comment!
+                </div>
+                <div ng-repeat="comment in comments">
+                    Title: {{comment.title}}<br/>
+                    Name: {{comment.name}}<br/>
+                    Rating:
+                    <rating max="5" ng-model="comment.ratings" readonly="true"></rating>
+                    <br/>
+                    Comment: {{comment.comment}}<br/><br/>
+
+                </div>
+
+                <!--
                 display existing comments here
                 each comment should also have UI allowing the user to vote up/down the comment
                 as well as delete it

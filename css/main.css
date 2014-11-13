@@ -11,3 +11,11 @@ body {
     margin-right: 10px;
 }
 
+.input-mysize {
+    width: 250px;
+}
+
+
+#new-msg {
+    display: none;
+}
