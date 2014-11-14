@@ -1,6 +1,6 @@
 "use strict";
 /*
-    to Do: Include thumbs up thumbs down
+    to Do:
             include delete function
             better presentaitoin for comment section
 */
@@ -38,16 +38,11 @@ function validateRequiredField(field) {
     var valid = value.length > 0;
     if(valid) {
         field.className = "form-control";
-
     }
-
     else {
         field.className = "form-control invalid-field";
     }
-
     return valid;
-
-
 }
 
 angular.module('RateApp', ['ui.bootstrap'])
@@ -55,23 +50,17 @@ angular.module('RateApp', ['ui.bootstrap'])
 		$httpProvider.defaults.headers.common['X-Parse-Application-Id'] = 'wSTIwnlIBAEYc8sj1BYfr1Pl3WfLoSiYXqDRph03';
 		$httpProvider.defaults.headers.common['X-Parse-REST-API-Key'] = '7u7h7u5mEtcuLTgcGa7POurLgtJ9IAftfoluXnZX';
 	}).controller('CommentsController', function($scope, $http) {
-
-
         $scope.refreshComments = function() {
             $scope.loading = true;
-            $http.get(taskUrl).success(function(data) {
+            $http.get(taskUrl + '?order=-votes').success(function(data) {
                 $scope.comments = data.results;
 
                 if(data.results.length == 0) {
                     $scope.isEmpty = true;
-
-
                 }
                 else {
                     $scope.isEmpty = false;
-
                 }
-
 
             }).error(function(err) {
                 $scope.errorMessage = err;
@@ -88,7 +77,6 @@ angular.module('RateApp', ['ui.bootstrap'])
             name: '',
             comment: '',
             ratings: null
-
         };
 
 
@@ -130,6 +118,42 @@ angular.module('RateApp', ['ui.bootstrap'])
                 });
             }
 
+        };
+
+        $scope.deleteComment = function(comment) {
+            
+            $http.delete(taskUrl + '/' + comment.objectId).success(function() {
+                $scope.refreshComments();
+            }).error(function(err) {
+                $scope.errorMessage = err;
+            });
+            
+        };
+
+        $scope.incrementVotes = function(comment, amount) {
+
+
+            $scope.votes = {
+                votes: {
+                    __op: 'Increment',
+                    amount: amount
+                }
+            };
+
+            if($scope.votes.votes.amount == -1) {
+                if(comment.votes < 1) {
+                    return;
+                }
+            }
+
+            $scope.updating = true;
+            $http.put(taskUrl + '/' + comment.objectId, $scope.votes).success(function(responseData) {
+                comment.votes = responseData.votes;
+            }).error(function(err) {
+                $scope.errorMessage = err;
+            }).finally(function() {
+                $scope.updating = false;
+            });
         };
 
 
