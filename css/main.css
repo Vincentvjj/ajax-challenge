@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:400,500);
+@import url(http://fonts.googleapis.com/css?family=Signika:400,300);
 
 body {
     font-family: 'Ubuntu', 'Helvetica Neue', 'Helvetica', sans-serif;
@@ -34,4 +35,30 @@ body {
 .no-comments-yet {
 	color: grey;
 	font-size: 16px;
+}
+
+.comment-section img {
+    margin: 5px;
+}
+
+.info-comment {
+    margin-bottom: 30px;
+}
+
+#user-name {
+    color: blue;
+    font-size: 18px;
+    margin-bottom: 7px;
+}
+
+#comment-title {
+
+    color: darkblue;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#comment-comment {
+    font-family: 'Signika', sans-serif;
+    font-weight: 300;
 }

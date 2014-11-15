@@ -55,24 +55,29 @@
                 </form>
             </section>
 
-            <section>
+            <section class="comment-section">
                 <h2>Comments</h2>
                 <img src="img/ajax-spinner.gif" alt="ajax animation" ng-if="loading"/>
                 <div class="no-comments-yet" ng-if="isEmpty">
                     <p>There are no comments yet! Be the first to review this!</p>
                 </div>
                 <div ng-repeat="comment in comments">
+                    <p id="comment-title">{{comment.title}}</p>
                     {{comment.votes || 0}}
                     <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementVotes(comment, 1)"></span>
-                    <span class="glyphicon glyphicon-thumbs-down" ng-click="incrementVotes(comment, -1)"></span><br>
-                    Title: {{comment.title}}<br/>
-                    {{comment.name}} said, "{{comment.comment}}." <br/>
-                    Rating:
-                    <rating max="5" ng-model="comment.ratings" readonly="true"></rating><br>
+                    <span class="glyphicon glyphicon-thumbs-down" ng-click="incrementVotes(comment, -1)"></span><br></p>
+                    <div class="info-comment">
+                        <img src="img/avatar1.jpg" alt="no face icon" width="80px" height="80px" align="left"/>
+                        <p id="user-name">{{comment.name}}</p>
+                        Rating: <rating max="5" ng-model="comment.ratings" readonly="true"></rating><br>
+                        <p id="comment-comment">{{comment.comment}}</p>
+                    </div>
+
                     <button class="btn btn-danger btn-xs" ng-disabled="inserting" ng-click="deleteComment(comment)">
                         Delete comment
                     </button>
-                    <br/><br/>
+                    <hr width="90%">                   
+                    
                 </div>
             </section>
         </main>
