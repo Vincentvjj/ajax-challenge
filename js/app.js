@@ -1,7 +1,6 @@
 "use strict";
 /*
     to Do:
-            include delete function
             better presentaitoin for comment section
 */
 
@@ -14,7 +13,6 @@ function onSubmit(evt) {
 
     if (evt.returnValue == false && evt.preventDefault) {
         evt.preventDefault();
-
     }
 
     return evt.returnValue;
@@ -53,6 +51,7 @@ angular.module('RateApp', ['ui.bootstrap'])
         $scope.refreshComments = function() {
             $scope.loading = true;
             $http.get(taskUrl + '?order=-votes').success(function(data) {
+
                 $scope.comments = data.results;
 
                 if(data.results.length == 0) {
@@ -61,10 +60,12 @@ angular.module('RateApp', ['ui.bootstrap'])
                 else {
                     $scope.isEmpty = false;
                 }
-
             }).error(function(err) {
+
                 $scope.errorMessage = err;
+
             }).finally(function() {
+                
                 $scope.loading = false;
             });
         };
@@ -79,14 +80,13 @@ angular.module('RateApp', ['ui.bootstrap'])
             ratings: null
         };
 
-
         $scope.addComments = function() {
             document.getElementById("rating-message").style.display = "none";
             if($scope.newComments.title == '' || $scope.newComments.name == '' || $scope.newComments.comment == '' ||
                 $scope.newComments.ratings == null) {
                 if($scope.newComments.ratings == null) {
                     document.getElementById("rating-message").style.display = "block";
-                    document.getElementById("rating-message").innerHTML = "AT least One star Please :(";
+                    document.getElementById("rating-message").innerHTML = "AT least One Star Please :(";
 
 
                     document.getElementById("rating-message").style.color = "red";
@@ -107,9 +107,7 @@ angular.module('RateApp', ['ui.bootstrap'])
                         name: '',
                         comment: '',
                         ratings: null
-
                     };
-
 
 
                 }).error(function (err) {
@@ -141,8 +139,8 @@ angular.module('RateApp', ['ui.bootstrap'])
             };
 
             if($scope.votes.votes.amount == -1) {
-                if(comment.votes < 1) {
-                    return;
+                if(comment.votes < 1 || comment.votes == null) {
+                    return; 
                 }
             }
 
