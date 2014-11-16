@@ -1,8 +1,4 @@
 "use strict";
-/*
-    to Do:
-            better presentaitoin for comment section
-*/
 
 var taskUrl = 'https://api.parse.com/1/classes/comments';
 
@@ -14,10 +10,8 @@ function onSubmit(evt) {
     if (evt.returnValue == false && evt.preventDefault) {
         evt.preventDefault();
     }
-
     return evt.returnValue;
 } //onSubmit()
-
 
 function validateForm(form) {
     var requiredFields = ['name', 'comment', 'title'];
@@ -26,7 +20,6 @@ function validateForm(form) {
     for(var i = 0; i < requiredFields.length; i++) {
         formValid &= validateRequiredField(form.elements[requiredFields[i]]);
     }
-
     return formValid;
 } //validateForm()
 
@@ -51,9 +44,7 @@ angular.module('RateApp', ['ui.bootstrap'])
         $scope.refreshComments = function() {
             $scope.loading = true;
             $http.get(taskUrl + '?order=-votes').success(function(data) {
-
                 $scope.comments = data.results;
-
                 if(data.results.length == 0) {
                     $scope.isEmpty = true;
                 }
@@ -61,11 +52,8 @@ angular.module('RateApp', ['ui.bootstrap'])
                     $scope.isEmpty = false;
                 }
             }).error(function(err) {
-
                 $scope.errorMessage = err;
-
             }).finally(function() {
-                
                 $scope.loading = false;
             });
         };
@@ -73,7 +61,6 @@ angular.module('RateApp', ['ui.bootstrap'])
         $scope.refreshComments();
 
         $scope.newComments = {
-
             title: '',
             name: '',
             comment: '',
@@ -87,50 +74,36 @@ angular.module('RateApp', ['ui.bootstrap'])
                 if($scope.newComments.ratings == null) {
                     document.getElementById("rating-message").style.display = "block";
                     document.getElementById("rating-message").innerHTML = "AT least One Star Please :(";
-
-
                     document.getElementById("rating-message").style.color = "red";
                 }
                 return;
             }
             else {
-
                 $http.post(taskUrl, $scope.newComments).success(function (responseData) {
                     $scope.newComments.objectId = responseData.objectId;
-
-
                     $scope.comments.push($scope.newComments);
                     $scope.isEmpty = false;
                     $scope.newComments = {
-
                         title: '',
                         name: '',
                         comment: '',
                         ratings: null
                     };
-
-
                 }).error(function (err) {
                     $scope.errorMessage = err;
-
                 });
             }
-
         };
 
         $scope.deleteComment = function(comment) {
-            
             $http.delete(taskUrl + '/' + comment.objectId).success(function() {
                 $scope.refreshComments();
             }).error(function(err) {
                 $scope.errorMessage = err;
             });
-            
         };
 
         $scope.incrementVotes = function(comment, amount) {
-
-
             $scope.votes = {
                 votes: {
                     __op: 'Increment',
@@ -153,11 +126,4 @@ angular.module('RateApp', ['ui.bootstrap'])
                 $scope.updating = false;
             });
         };
-
-
-
-
-
 	});
-
-
