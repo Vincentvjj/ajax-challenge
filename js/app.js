@@ -126,4 +126,4 @@ angular.module('RateApp', ['ui.bootstrap'])
                 $scope.updating = false;
             });
         };
-	});
+});
