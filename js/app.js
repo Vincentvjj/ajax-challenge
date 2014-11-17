@@ -69,7 +69,7 @@ angular.module('RateApp', ['ui.bootstrap'])
 
         $scope.addComments = function() {
             document.getElementById("rating-message").style.display = "none";
-            if($scope.newComments.title == '' || $scope.newComments.name == '' || $scope.newComments.comment == '' ||
+            if($scope.newComments.title == '' || $scope.newComments.name == '' ||
                 $scope.newComments.ratings == null) {
                 if($scope.newComments.ratings == null) {
                     document.getElementById("rating-message").style.display = "block";
