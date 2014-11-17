@@ -79,7 +79,7 @@ angular.module('RateApp', ['ui.bootstrap'])
                 return;
             }
             else {
-                $http.post(taskUrl, $scope.newComments).success(function (responseData) {
+                $http.post(taskUrl, $scope.newComments).success(function(responseData) {
                     $scope.newComments.objectId = responseData.objectId;
                     $scope.comments.push($scope.newComments);
                     $scope.isEmpty = false;
