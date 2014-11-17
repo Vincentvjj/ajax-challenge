@@ -14,7 +14,7 @@ function onSubmit(evt) {
 } //onSubmit()
 
 function validateForm(form) {
-    var requiredFields = ['name', 'comment', 'title'];
+    var requiredFields = ['name', 'title'];
     var formValid = true;
 
     for(var i = 0; i < requiredFields.length; i++) {
