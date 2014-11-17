@@ -70,7 +70,7 @@
                         <img src="img/avatar1.jpg" alt="no face icon" width="80px" height="80px" align="left"/>
                         <p id="user-name">{{comment.name}}</p>
                         Rating: <rating max="5" ng-model="comment.ratings" readonly="true"></rating><br>
-                        <p id="comment-comment">{{comment.comment}}</p>
+                        <p id="comment-comment">{{comment.comment}}</p><br>
                     </div>
                     <button class="btn btn-danger btn-xs" ng-disabled="inserting" ng-click="deleteComment(comment)">
                         Delete comment
