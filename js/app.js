@@ -73,7 +73,7 @@ angular.module('RateApp', ['ui.bootstrap'])
                 $scope.newComments.ratings == null) {
                 if($scope.newComments.ratings == null) {
                     document.getElementById("rating-message").style.display = "block";
-                    document.getElementById("rating-message").innerHTML = "AT least One Star Please :(";
+                    document.getElementById("rating-message").innerHTML = "Please give at least a star!";
                     document.getElementById("rating-message").style.color = "red";
                 }
                 return;
