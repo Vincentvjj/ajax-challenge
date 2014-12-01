@@ -111,7 +111,7 @@ angular.module('RateApp', ['ui.bootstrap'])
                 }
             };
 
-            if($scope.votes.votes.amount == -1) {
+            if(amount == -1) {
                 if(comment.votes < 1 || comment.votes == null) {
                     return; 
                 }
